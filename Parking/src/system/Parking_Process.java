@@ -60,10 +60,11 @@ public class Parking_Process {
             }else if(result == NO_CAR){
                 if (List_DB.getInstance().parking_area[0][0].equals("Empty")) {
                     List_DB.getInstance().parking_area[0][0] = car_num;
-                    System.out.println("Parking Success");
+                    System.out.println("Success");
+                    menu();
                 }else if(check_array() >= 16){
                     input_car_two(car_num);
-                    System.out.println("Parking Success");
+                    System.out.println("Success");
                 }
                 else {
                     for (int i = 0; i < List_DB.getInstance().parking_area.length; i++) {
@@ -71,7 +72,7 @@ public class Parking_Process {
                             if (List_DB.getInstance().parking_area[i][j].equals("Empty")) {
                                 List_DB.getInstance().parking_area[i][j] = car_num;
                                 //주차에 성공하면 반복문 탈출
-                                System.out.println("Parking Success");
+                                System.out.println("Success");
                                 menu();
                             }
                         }
@@ -93,7 +94,7 @@ public class Parking_Process {
                 if(List_DB.getInstance().parking_area_two[i][j].equals("Empty")){
                     List_DB.getInstance().parking_area_two[i][j] = car_num;
 
-                    System.out.println("Success Parking");
+                    System.out.println("Success");
                     menu();
                 }
             }
@@ -104,20 +105,36 @@ public class Parking_Process {
         String car_num = return_car_num();
 
         try{
-            for(int i=0; i < List_DB.getInstance().parking_area.length; i++){
-                for(int j=0; j < List_DB.getInstance().parking_area.length; j++){
-                    if(List_DB.getInstance().parking_area[i][j].equals(car_num)){
-                        List_DB.getInstance().parking_area[i][j] = "Empty";
-                        menu();
-                    }else{
-                        System.out.println("잘못된 차량 번호를 입력했습니다.");
-                        menu();
+            if(check_array() >= 16){
+                out_car_two(car_num);
+            }else {
+                for (int i = 0; i < List_DB.getInstance().parking_area.length; i++) {
+                    for (int j = 0; j < List_DB.getInstance().parking_area.length; j++) {
+                        if (List_DB.getInstance().parking_area[i][j].equals(car_num)) {
+                            List_DB.getInstance().parking_area[i][j] = "Empty";
+                            System.out.println("Success");
+                            menu();
+                        }
                     }
                 }
             }
+            System.out.println("잘못된 입력");
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    //두 번째 층 차량 삭제
+    private void out_car_two(String car_num){
+        for(int i=0; i < List_DB.getInstance().parking_area_two.length; i++){
+            for(int j=0; j < List_DB.getInstance().parking_area_two.length; j++){
+                if(List_DB.getInstance().parking_area_two[i][j].equals(car_num)){
+                    List_DB.getInstance().parking_area_two[i][j] = "Empty";
+                    System.out.println("Success");
+                    menu();
+                }
+            }
+        }
+        System.out.println("잘못된 입력");
     }
 
     //주차된 차량 확인
