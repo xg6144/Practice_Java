@@ -11,9 +11,7 @@ public class Graphics {
         if(floor == 1) {
             if (List_DB.getInstance().parking_area[0][0].equals("Empty")) {
                 x1 = "1";
-                System.out.println("1");
             } else {
-                System.out.println("X");
                 x1 = "X";
             }
 
@@ -111,9 +109,7 @@ public class Graphics {
         else if(floor == 2){
             if (List_DB.getInstance().parking_area_two[0][0].equals("Empty")) {
                 x1 = "1";
-                System.out.println("1");
             } else {
-                System.out.println("X");
                 x1 = "X";
             }
 

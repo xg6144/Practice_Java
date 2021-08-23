@@ -58,25 +58,19 @@ public class Parking_Process {
             if(result == ALREDY_CAR){
                 menu();
             }else if(result == NO_CAR){
-                if (List_DB.getInstance().parking_area[0][0].equals("Empty")) {
-                    List_DB.getInstance().parking_area[0][0] = car_num;
-                    System.out.println("Success");
-                    menu();
-                }else if(check_array() >= 16){
-                    input_car_two(car_num);
-                    System.out.println("Success");
-                }
-                else {
-                    for (int i = 0; i < List_DB.getInstance().parking_area.length; i++) {
-                        for (int j = 0; j < List_DB.getInstance().parking_area.length; j++) {
-                            if (List_DB.getInstance().parking_area[i][j].equals("Empty")) {
-                                List_DB.getInstance().parking_area[i][j] = car_num;
-                                //주차에 성공하면 반복문 탈출
-                                System.out.println("Success");
-                                menu();
-                            }
+                for (int i = 0; i < List_DB.getInstance().parking_area.length; i++) {
+                    for (int j = 0; j < List_DB.getInstance().parking_area.length; j++) {
+                        if (List_DB.getInstance().parking_area[i][j].equals("Empty")) {
+                            List_DB.getInstance().parking_area[i][j] = car_num;
+                            //주차에 성공하면 반복문 탈출
+                            System.out.println("Success");
+                            menu();
                         }
                     }
+                }
+                if(check_array() >= 16){
+                    input_car_two(car_num);
+                    System.out.println("Success");
                 }
             }else{
                 System.out.println("Error");
